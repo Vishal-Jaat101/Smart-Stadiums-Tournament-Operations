@@ -1,0 +1,399 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-stadiumCharcoal text-stadiumFloodlight font-sans antialiased select-none;
+  }
+  
+  /* Focus outlines for accessibility keyboard navigation */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-stadiumCyan ring-2 ring-stadiumCyan/50;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #1a1e26;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a313e;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3fa9d6;
+}
+
+/* Scrolling Alert Ticker Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  display: inline-flex;
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Radar Sweep Animation for Stadium Bowl */
+@keyframes radar-sweep {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.radar-sweep-effect {
+  transform-origin: 250px 250px; /* SVG Center Point */
+  animation: radar-sweep 12s linear infinite;
+}
+
+/* Wedge pulsing logic when threshold crossed */
+@keyframes soft-pulse {
+  0%, 100% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.pulse-critical {
+  animation: soft-pulse 2s infinite ease-in-out;
+}
+
+/* Accessible High Contrast Mode Override */
+.high-contrast-mode {
+  filter: contrast(1.6) saturate(1.4);
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+.high-contrast-mode body,
+.high-contrast-mode #root,
+.high-contrast-mode div,
+.high-contrast-mode header,
+.high-contrast-mode aside,
+.high-contrast-mode section,
+.high-contrast-mode main,
+.high-contrast-mode nav,
+.high-contrast-mode tr,
+.high-contrast-mode td,
+.high-contrast-mode th,
+.high-contrast-mode select,
+.high-contrast-mode p,
+.high-contrast-mode span,
+.high-contrast-mode h1,
+.high-contrast-mode h2,
+.high-contrast-mode h3,
+.high-contrast-mode h4,
+.high-contrast-mode label {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+/* High contrast text overrides */
+.high-contrast-mode .text-zinc-300,
+.high-contrast-mode .text-zinc-400,
+.high-contrast-mode .text-zinc-500,
+.high-contrast-mode .text-zinc-600,
+.high-contrast-mode .text-stadiumFloodlight {
+  color: #ffffff !important;
+}
+
+/* Buttons in High Contrast - yellow text on black background */
+.high-contrast-mode button {
+  border: 2px solid #ffff00 !important;
+  color: #ffff00 !important;
+  background-color: #000000 !important;
+  font-weight: bold !important;
+}
+
+.high-contrast-mode button:hover,
+.high-contrast-mode button:focus {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+}
+
+/* Specific elements like active navigation tab buttons in High Contrast */
+.high-contrast-mode nav button.bg-stadiumCyan {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+  border-color: #ffff00 !important;
+}
+
+/* Scale base fonts in High Contrast mode */
+.high-contrast-mode * {
+  font-size: calc(100% + 0.5px) !important;
+}
+
+/* Recharts / SVG high contrast overrides */
+.high-contrast-mode svg {
+  background-color: #000000 !important;
+}
+
+.high-contrast-mode svg text {
+  fill: #ffffff !important;
+}
+
+/* Overload tooltip container black boxes */
+.high-contrast-mode div[class*="recharts-tooltip-wrapper"] * {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+/* Support reduced motion overrides */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .radar-sweep-effect,
+  .pulse-critical {
+    animation: none !important;
+  }
+}
+
+/* Premium Light Theme / White Theme Styles */
+.light-theme {
+  background-color: #F5F7FA !important;
+  color: #12151A !important;
+}
+
+.light-theme body,
+.light-theme #root,
+.light-theme .bg-stadiumCharcoal {
+  background-color: #F5F7FA !important;
+  color: #12151A !important;
+}
+
+/* Escaped Tailwind selectors matching background colors */
+.light-theme .bg-\[\#12151a\],
+.light-theme .bg-\[\#12151a\]\/40,
+.light-theme .bg-\[\#12151a\]\/20 {
+  background-color: #ffffff !important;
+}
+
+.light-theme .bg-\[\#1b1f28\],
+.light-theme .bg-\[\#1b1f28\]\/40,
+.light-theme .bg-\[\#161a23\] {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Wildcard selector to capture any Tailwind arbitrary background colors except status labels */
+.light-theme div[class*="bg-[#"]:not([class*="/"]):not([class*="Red"]):not([class*="Turf"]):not([class*="Cyan"]):not([class*="Amber"]),
+.light-theme aside[class*="bg-[#"],
+.light-theme section[class*="bg-[#"],
+.light-theme main[class*="bg-[#"],
+.light-theme nav[class*="bg-[#"],
+.light-theme header[class*="bg-[#"],
+.light-theme tr[class*="bg-[#"],
+.light-theme th[class*="bg-[#"],
+.light-theme td[class*="bg-[#"],
+.light-theme button[class*="bg-[#"]:not([class*="/"]):not([class*="Red"]):not([class*="Turf"]):not([class*="Cyan"]):not([class*="Amber"]) {
+  background-color: #ffffff !important;
+  color: #12151A !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Specific button overrides inside modules */
+.light-theme button[class*="bg-[#12151a]"],
+.light-theme button[class*="bg-[#1b1f28]"] {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+/* Headers and sidebar panels borders */
+.light-theme header,
+.light-theme aside,
+.light-theme main,
+.light-theme nav,
+.light-theme .border-b,
+.light-theme .border-t,
+.light-theme .border-r,
+.light-theme .border-l,
+.light-theme .border,
+.light-theme *[class*="border-[#"] {
+  border-color: #cbd5e1 !important;
+}
+
+.light-theme header {
+  background-color: #ffffff !important;
+  border-bottom: 2px solid #cbd5e1 !important;
+}
+
+.light-theme aside {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+
+.light-theme main {
+  background-color: #f1f5f9 !important;
+}
+
+/* Headings and labels */
+.light-theme h1,
+.light-theme h2,
+.light-theme h3,
+.light-theme h4,
+.light-theme p,
+.light-theme span,
+.light-theme label,
+.light-theme div:not(.bg-stadiumRed):not(.bg-stadiumAmber):not(.bg-stadiumCyan):not(.bg-stadiumTurf):not(.bg-emerald-950\/20):not(.bg-emerald-500\/30) {
+  color: #0f172a !important;
+}
+
+.light-theme .text-stadiumFloodlight {
+  color: #0f172a !important;
+}
+
+.light-theme .text-zinc-300,
+.light-theme .text-zinc-400 {
+  color: #475569 !important;
+}
+
+.light-theme .text-zinc-500,
+.light-theme .text-zinc-600 {
+  color: #64748b !important;
+}
+
+/* Custom interactive buttons in general */
+.light-theme button:not(.bg-stadiumCyan):not(.bg-stadiumRed):not(.bg-stadiumTurf):not(.bg-stadiumAmber):not(.text-stadiumCharcoal) {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+.light-theme button:hover:not(.bg-stadiumCyan):not(.bg-stadiumRed):not(.bg-stadiumTurf):not(.bg-stadiumAmber):not(.text-stadiumCharcoal) {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+/* Form selects/inputs */
+.light-theme select,
+.light-theme input {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+/* Navigation tabs */
+.light-theme nav button:not(.bg-stadiumCyan) {
+  background-color: #e2e8f0 !important;
+  color: #475569 !important;
+  border-color: #cbd5e1 !important;
+}
+
+.light-theme nav button.bg-stadiumCyan {
+  background-color: #3FA9D6 !important;
+  color: #ffffff !important;
+}
+
+/* Stadium bowl SVG elements */
+.light-theme svg {
+  background-color: #ffffff !important;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+}
+
+.light-theme svg text {
+  fill: #0f172a !important;
+}
+
+.light-theme svg circle[stroke="#2e3748"] {
+  stroke: #e2e8f0 !important;
+}
+.light-theme svg line[stroke="#2e3748"] {
+  stroke: #e2e8f0 !important;
+}
+.light-theme svg path[stroke="#2e3748"] {
+  stroke: #e2e8f0 !important;
+}
+
+/* Agent Log Items styling in Light theme */
+.light-theme .bg-stadiumCharcoal.p-3 {
+  background-color: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+/* Custom Scrollbar in Light Theme */
+.light-theme *::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+}
+
+.light-theme *::-webkit-scrollbar-track {
+  background: #f1f5f9 !important;
+}
+
+.light-theme *::-webkit-scrollbar-thumb {
+  background: #cbd5e1 !important;
+  border-radius: 4px !important;
+  border: 2px solid #f1f5f9 !important;
+}
+
+.light-theme *::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8 !important;
+}
+
+/* Specific ADK Grid Status Swatch nodes in Light theme */
+.light-theme .p-1.rounded.bg-\[\#1e293b\] {
+  background-color: #eff6ff !important;
+  color: #1d4ed8 !important;
+  border-color: #bfdbfe !important;
+}
+.light-theme .p-1.rounded.bg-\[\#1e293b\] * {
+  color: #1d4ed8 !important;
+}
+
+.light-theme .p-1.rounded.bg-\[\#3b0764\]\/20 {
+  background-color: #faf5ff !important;
+  color: #7e22ce !important;
+  border-color: #e9d5ff !important;
+}
+.light-theme .p-1.rounded.bg-\[\#3b0764\]\/20 * {
+  color: #7e22ce !important;
+}
+
+.light-theme .p-1.rounded.bg-emerald-950\/20 {
+  background-color: #ecfdf5 !important;
+  color: #047857 !important;
+  border-color: #a7f3d0 !important;
+}
+.light-theme .p-1.rounded.bg-emerald-950\/20 * {
+  color: #047857 !important;
+}
+
+/* Specific Agent log badge text overrides in Light Theme */
+.light-theme .text-blue-400 {
+  color: #1d4ed8 !important;
+}
+.light-theme .text-purple-400 {
+  color: #7e22ce !important;
+}
+.light-theme .text-emerald-400 {
+  color: #047857 !important;
+}
+
+/* Recharts tooltips and legends in Light Theme */
+.light-theme div[class*="recharts-tooltip-wrapper"] *,
+.light-theme .recharts-default-tooltip {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
